@@ -1,17 +1,31 @@
 <template>
   <view class="index">
-    <text>{{ msg }}</text>
+    editor:
+    <editor id="editor1" />
   </view>
 </template>
 
-<script>
+<script lang="ts">
+import Taro from '@tarojs/taro'
 import './index.css'
 
 export default {
-  data () {
+  data() {
     return {
-      msg: 'Hello world!'
     }
+  },
+  mounted() {
+    const page = Taro.getCurrentInstance().page
+    // @ts-ignore
+    page.createSelectorQuery().select('#editor1').context(res => {
+      console.log(res)
+      // null
+    }).exec()
+
+    Taro.createSelectorQuery().select('#editor1').context(res => {
+      console.log(res)
+      // null
+    }).exec()
   }
 }
 </script>
